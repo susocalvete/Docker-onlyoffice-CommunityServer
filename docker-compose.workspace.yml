@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 services:
   onlyoffice-mysql-server:
     container_name: onlyoffice-mysql-server
@@ -9,11 +9,11 @@ services:
      - onlyoffice
     stdin_open: true
     tty: true
-    restart: always
+    restart: unless-stopped
     volumes:
      - ./config/mysql/conf.d:/etc/mysql/conf.d
      - ./config/mysql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
-     - mysql_data:/var/lib/mysql
+     - /pools/mirrordata/volumenes_docker/only2024/mysql_data:/var/lib/mysql
   onlyoffice-community-server:
     container_name: onlyoffice-community-server
     image: onlyoffice/communityserver:12.0.1.1748
@@ -52,20 +52,20 @@ services:
      - '5222:5222'
     stdin_open: true
     tty: true
-    restart: always
+    restart: unless-stopped
     privileged: true
 #    cgroup: host
     volumes:
-     - community_data:/var/www/onlyoffice/Data
-     - community_log:/var/log/onlyoffice
-     - community_letsencrypt:/etc/letsencrypt
-     - document_data:/var/www/onlyoffice/DocumentServerData
+     - /pools/mirrordata/volumenes_docker/only2024/community_data:/var/www/onlyoffice/Data
+     - /pools/mirrordata/volumenes_docker/only2024/community_log:/var/log/onlyoffice
+     - /pools/mirrordata/volumenes_docker/only2024/community_letsencrypt:/etc/letsencrypt
+     - /pools/mirrordata/volumenes_docker/only2024/document_data:/var/www/onlyoffice/DocumentServerData
      - /sys/fs/cgroup:/sys/fs/cgroup:rw
      - ./certs:/var/www/onlyoffice/Data/certs
   onlyoffice-elasticsearch:
     image: onlyoffice/elasticsearch:7.16.3
     container_name: onlyoffice-elasticsearch
-    restart: always
+    restart: unless-stopped
     environment:
       - discovery.type=single-node
       - bootstrap.memory_lock=true
@@ -83,7 +83,7 @@ services:
         soft: 65535
         hard: 65535
     volumes:
-      - es_data:/usr/share/elasticsearch/data
+      - /pools/mirrordata/volumenes_docker/only2024/es_data:/usr/share/elasticsearch/data
     expose:
       - "9200"
       - "9300"
@@ -92,7 +92,7 @@ services:
     image: onlyoffice/documentserver:7.1.1.23
     stdin_open: true
     tty: true
-    restart: always
+    restart: unless-stopped
     environment:
      - JWT_ENABLED=true
      - JWT_SECRET=jwt_secret
@@ -103,10 +103,10 @@ services:
       - '80'
       - '443'
     volumes:
-       - document_data:/var/www/onlyoffice/Data
-       - document_log:/var/log/onlyoffice
+       - /pools/mirrordata/volumenes_docker/only2024/document_data:/var/www/onlyoffice/Data
+       - /pools/mirrordata/volumenes_docker/only2024/document_log:/var/log/onlyoffice
        - ./document_fonts:/usr/share/fonts/truetype/custom
-       - document_forgotten:/var/lib/onlyoffice/documentserver/App_Data/cache/files/forgotten
+       - /pools/mirrordata/volumenes_docker/only2024/document_forgotten:/var/lib/onlyoffice/documentserver/App_Data/cache/files/forgotten
   onlyoffice-mail-server:
     container_name: onlyoffice-mail-server
     image: onlyoffice/mailserver:1.6.75
@@ -121,7 +121,7 @@ services:
        - MYSQL_SERVER_DB_NAME=onlyoffice_mailserver
     networks:
       - onlyoffice
-    restart: always
+    restart: unless-stopped
     privileged: true
     ports: ['25:25','143:143','587:587']
     stdin_open: true
@@ -130,9 +130,9 @@ services:
       - '8081'
       - '3306'
     volumes:
-      - mail_data:/var/vmail
-      - mail_certs:/etc/pki/tls/mailserver
-      - mail_log:/var/log
+      - /pools/mirrordata/volumenes_docker/only2024/mail_data:/var/vmail
+      - /pools/mirrordata/volumenes_docker/only2024/mail_certs:/etc/pki/tls/mailserver
+      - /pools/mirrordata/volumenes_docker/only2024/mail_log:/var/log
   onlyoffice-control-panel:
     container_name: onlyoffice-control-panel
     depends_on:
@@ -145,11 +145,11 @@ services:
     expose:
       - '80'
       - '443'
-    restart: always
+    restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - controlpanel_data:/var/www/onlyoffice/Data
-      - controlpanel_log:/var/log/onlyoffice
+      - /pools/mirrordata/volumenes_docker/only2024/controlpanel_data:/var/www/onlyoffice/Data
+      - /pools/mirrordata/volumenes_docker/only2024/controlpanel_log:/var/log/onlyoffice
     networks:
       - onlyoffice
     stdin_open: true
@@ -157,19 +157,19 @@ services:
 networks:
   onlyoffice:
     driver: 'bridge'
-volumes:
-  mail_data:
-  mail_certs:
-  mail_log:
-  mail_mysql:
-  document_data:
-  document_log:
-  document_forgotten:
-  community_mysql:
-  community_data:
-  community_log:
-  community_letsencrypt:
-  controlpanel_data:
-  controlpanel_log:
-  mysql_data:
-  es_data:
+#volumes:
+#  mail_data:
+#  mail_certs:
+#  mail_log:
+#  mail_mysql:
+#  document_data:
+#  document_log:
+#  document_forgotten:
+#  community_mysql:
+#  community_data:
+#  community_log:
+#  community_letsencrypt:
+#  controlpanel_data:
+#  controlpanel_log:
+#  mysql_data:
+#  es_data:
