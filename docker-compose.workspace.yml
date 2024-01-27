@@ -2,7 +2,7 @@ version: '3.9'
 services:
   onlyoffice-mysql-server:
     container_name: onlyoffice-mysql-server
-    image: mysql:8.0.29
+    image: mysql:latest
     environment:
      - MYSQL_ROOT_PASSWORD=my-secret-pw
     networks:
@@ -16,7 +16,7 @@ services:
      - /pools/mirrordata/volumenes_docker/only2024/mysql_data:/var/lib/mysql
   onlyoffice-community-server:
     container_name: onlyoffice-community-server
-    image: onlyoffice/communityserver:12.0.1.1748
+    image: onlyoffice/communityserver:latest
     depends_on:
      - onlyoffice-mysql-server
      - onlyoffice-document-server
@@ -63,7 +63,7 @@ services:
      - /sys/fs/cgroup:/sys/fs/cgroup:rw
      - ./certs:/var/www/onlyoffice/Data/certs
   onlyoffice-elasticsearch:
-    image: onlyoffice/elasticsearch:7.16.3
+    image: onlyoffice/elasticsearch:latest
     container_name: onlyoffice-elasticsearch
     restart: unless-stopped
     environment:
@@ -89,7 +89,7 @@ services:
       - "9300"
   onlyoffice-document-server:
     container_name: onlyoffice-document-server
-    image: onlyoffice/documentserver:7.1.1.23
+    image: onlyoffice/documentserver:latest
     stdin_open: true
     tty: true
     restart: unless-stopped
@@ -109,7 +109,7 @@ services:
        - /pools/mirrordata/volumenes_docker/only2024/document_forgotten:/var/lib/onlyoffice/documentserver/App_Data/cache/files/forgotten
   onlyoffice-mail-server:
     container_name: onlyoffice-mail-server
-    image: onlyoffice/mailserver:1.6.75
+    image: onlyoffice/mailserver:latest
     depends_on:
       - onlyoffice-mysql-server
     hostname: espidos.org
@@ -139,7 +139,7 @@ services:
      - onlyoffice-document-server
      - onlyoffice-mail-server
      - onlyoffice-community-server
-    image: onlyoffice/controlpanel:3.1.1.467
+    image: onlyoffice/controlpanel:latest
     environment:
      - ONLYOFFICE_CORE_MACHINEKEY=core_secret
     expose:
