@@ -40,7 +40,7 @@ services:
      - MAIL_SERVER_DB_HOST=onlyoffice-mysql-server
      - MAIL_SERVER_DB_PORT=3306
      - MAIL_SERVER_DB_NAME=onlyoffice_mailserver
-     - MAIL_SERVER_DB_USER=root
+     - MAIL_SERVER_DB_USER=mail_admin
      - MAIL_SERVER_DB_PASS=Isadmin123
      - ELASTICSEARCH_SERVER_HOST=onlyoffice-elasticsearch
      - ELASTICSEARCH_SERVER_HTTPPORT=9200
@@ -116,7 +116,7 @@ services:
     environment:
        - MYSQL_SERVER=onlyoffice-mysql-server
        - MYSQL_SERVER_PORT=3306
-       - MYSQL_ROOT_USER=root
+       - MYSQL_ROOT_USER=mail_admin
        - MYSQL_ROOT_PASSWD=Isadmin123
        - MYSQL_SERVER_DB_NAME=onlyoffice_mailserver
     networks:
