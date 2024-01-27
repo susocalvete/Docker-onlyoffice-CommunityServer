@@ -54,7 +54,7 @@ services:
     tty: true
     restart: unless-stopped
     privileged: true
-    cgroup: host
+  # cgroup: host
     volumes:
      - /pools/mirrordata/volumenes_docker/only2024/community_data:/var/www/onlyoffice/Data
      - /pools/mirrordata/volumenes_docker/only2024/community_log:/var/log/onlyoffice
