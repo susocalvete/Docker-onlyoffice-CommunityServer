@@ -107,32 +107,32 @@ services:
        - /pools/mirrordata/volumenes_docker/only2024/document_log:/var/log/onlyoffice
        - ./document_fonts:/usr/share/fonts/truetype/custom
        - /pools/mirrordata/volumenes_docker/only2024/document_forgotten:/var/lib/onlyoffice/documentserver/App_Data/cache/files/forgotten
-  onlyoffice-mail-server:
-    container_name: onlyoffice-mail-server
-    image: onlyoffice/mailserver:1.6.75
-    depends_on:
-      - onlyoffice-mysql-server
-    hostname: ${MAIL_SERVER_HOSTNAME}
-    environment:
-       - MYSQL_SERVER=onlyoffice-mysql-server
-       - MYSQL_SERVER_PORT=3306
-       - MYSQL_ROOT_USER=mail_admin
-       - MYSQL_ROOT_PASSWD=Isadmin123
-       - MYSQL_SERVER_DB_NAME=onlyoffice_mailserver
-    networks:
-      - onlyoffice
-    restart: unless-stopped
-    privileged: true
-    ports: ['25:25','143:143','587:587']
-    stdin_open: true
-    tty: true
-    expose:
-      - '8081'
-      - '3306'
-    volumes:
-      - /pools/mirrordata/volumenes_docker/only2024/mail_data:/var/vmail
-      - /pools/mirrordata/volumenes_docker/only2024/mail_certs:/etc/pki/tls/mailserver
-      - /pools/mirrordata/volumenes_docker/only2024/mail_log:/var/log
+ # onlyoffice-mail-server:
+ #   container_name: onlyoffice-mail-server
+ #   image: onlyoffice/mailserver:1.6.75
+ #   depends_on:
+ #     - onlyoffice-mysql-server
+ #   hostname: ${MAIL_SERVER_HOSTNAME}
+ #   environment:
+ #      - MYSQL_SERVER=onlyoffice-mysql-server
+ #      - MYSQL_SERVER_PORT=3306
+ #      - MYSQL_ROOT_USER=mail_admin
+ #      - MYSQL_ROOT_PASSWD=Isadmin123
+ #      - MYSQL_SERVER_DB_NAME=onlyoffice_mailserver
+ #   networks:
+ #     - onlyoffice
+ #   restart: unless-stopped
+ #   privileged: true
+ #   ports: ['25:25','143:143','587:587']
+ #   stdin_open: true
+ #   tty: true
+ #   expose:
+ #     - '8081'
+ #     - '3306'
+ #   volumes:
+ #     - /pools/mirrordata/volumenes_docker/only2024/mail_data:/var/vmail
+ #     - /pools/mirrordata/volumenes_docker/only2024/mail_certs:/etc/pki/tls/mailserver
+ #     - /pools/mirrordata/volumenes_docker/only2024/mail_log:/var/log
   onlyoffice-control-panel:
     container_name: onlyoffice-control-panel
     depends_on:
