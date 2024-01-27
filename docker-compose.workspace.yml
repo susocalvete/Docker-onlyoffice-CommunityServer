@@ -4,7 +4,7 @@ services:
     container_name: onlyoffice-mysql-server
     image: mysql:8.0.29
     environment:
-     - MYSQL_ROOT_PASSWORD=my-secret-pw
+     - MYSQL_ROOT_PASSWORD=holahola
     networks:
      - onlyoffice
     stdin_open: true
@@ -30,7 +30,7 @@ services:
      - DOCUMENT_SERVER_JWT_ENABLED=true
      - DOCUMENT_SERVER_JWT_SECRET=jwt_secret
      - DOCUMENT_SERVER_JWT_HEADER=AuthorizationJwt
-     - MYSQL_SERVER_ROOT_PASSWORD=my-secret-pw
+     - MYSQL_SERVER_ROOT_PASSWORD=holahola
      - MYSQL_SERVER_DB_NAME=onlyoffice
      - MYSQL_SERVER_HOST=onlyoffice-mysql-server
      - MYSQL_SERVER_USER=onlyoffice_user
@@ -117,7 +117,7 @@ services:
        - MYSQL_SERVER=onlyoffice-mysql-server
        - MYSQL_SERVER_PORT=3306
        - MYSQL_ROOT_USER=mail_admin
-       - MYSQL_ROOT_PASSWD=Isadmin123
+       - MYSQL_ROOT_PASSWD=holahola
        - MYSQL_SERVER_DB_NAME=onlyoffice_mailserver
     networks:
       - onlyoffice
