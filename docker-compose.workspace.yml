@@ -83,7 +83,7 @@ services:
         soft: 65535
         hard: 65535
     volumes:
-      - /pools/mirrordata/volumenes_docker/only2024/es_data:/usr/share/elasticsearch/data
+      - /pools/mirrordata/volumenes_docker/only2024/es_data:/var/lib/elasticsearch/data
     expose:
       - "9200"
       - "9300"
