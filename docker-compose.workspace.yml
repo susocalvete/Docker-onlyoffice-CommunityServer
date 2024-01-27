@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3'
 services:
   onlyoffice-mysql-server:
     container_name: onlyoffice-mysql-server
@@ -21,7 +21,7 @@ services:
      - onlyoffice-mysql-server
      - onlyoffice-document-server
      #- onlyoffice-mail-server
-     #- onlyoffice-elasticsearch
+     - onlyoffice-elasticsearch
     environment:
      - ONLYOFFICE_CORE_MACHINEKEY=core_secret
      - CONTROL_PANEL_PORT_80_TCP=80
@@ -42,8 +42,8 @@ services:
      #- MAIL_SERVER_DB_NAME=onlyoffice_mailserver
      #- MAIL_SERVER_DB_USER=mail_admin
      #- MAIL_SERVER_DB_PASS=Isadmin123
-     #- ELASTICSEARCH_SERVER_HOST=onlyoffice-elasticsearch
-     #- ELASTICSEARCH_SERVER_HTTPPORT=9200
+     - ELASTICSEARCH_SERVER_HOST=onlyoffice-elasticsearch
+     - ELASTICSEARCH_SERVER_HTTPPORT=9200
     networks:
      - onlyoffice
     ports:
@@ -62,31 +62,31 @@ services:
      - /pools/mirrordata/volumenes_docker/only2024/document_data:/var/www/onlyoffice/DocumentServerData
      - /sys/fs/cgroup:/sys/fs/cgroup:rw
      - ./certs:/var/www/onlyoffice/Data/certs
-  #onlyoffice-elasticsearch:
-  #  image: onlyoffice/elasticsearch:7.16.3
-  #  container_name: onlyoffice-elasticsearch
-  #  restart: unless-stopped
-  #  environment:
-  #    - discovery.type=single-node
-  #    - bootstrap.memory_lock=true
-  #    - "ES_JAVA_OPTS=-Xms1g -Xmx1g -Dlog4j2.formatMsgNoLookups=true"
-  #    - "indices.fielddata.cache.size=30%"
-  #    - "indices.memory.index_buffer_size=30%" 
-  #    - "ingest.geoip.downloader.enabled=false"
-  #  networks:
-  #  - onlyoffice    
-  #  ulimits:
-  #    memlock:
-  #      soft: -1
-  #      hard: -1
-  #    nofile:
-  #      soft: 65535
-  #      hard: 65535
-  #  volumes:
-  #    - /pools/mirrordata/volumenes_docker/only2024/es_data:/usr/share/elasticsearch/data
-  #  expose:
-  #    - "9200"
-  #    - "9300"
+  onlyoffice-elasticsearch:
+    image: onlyoffice/elasticsearch:7.16.3
+    container_name: onlyoffice-elasticsearch
+    restart: unless-stopped
+    environment:
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms1g -Xmx1g -Dlog4j2.formatMsgNoLookups=true"
+      - "indices.fielddata.cache.size=30%"
+      - "indices.memory.index_buffer_size=30%" 
+      - "ingest.geoip.downloader.enabled=false"
+    networks:
+    - onlyoffice    
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65535
+        hard: 65535
+    volumes:
+      - /pools/mirrordata/volumenes_docker/only2024/es_data:/usr/share/elasticsearch/data
+    expose:
+      - "9200"
+      - "9300"
   onlyoffice-document-server:
     container_name: onlyoffice-document-server
     image: onlyoffice/documentserver:7.1.1.23
