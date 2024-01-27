@@ -20,7 +20,7 @@ services:
     depends_on:
      - onlyoffice-mysql-server
      - onlyoffice-document-server
-     #- onlyoffice-mail-server
+     - onlyoffice-mail-server
      - onlyoffice-elasticsearch
     environment:
      - ONLYOFFICE_CORE_MACHINEKEY=core_secret
@@ -137,7 +137,7 @@ services:
     container_name: onlyoffice-control-panel
     depends_on:
      - onlyoffice-document-server
-     #- onlyoffice-mail-server
+     - onlyoffice-mail-server
      - onlyoffice-community-server
     image: onlyoffice/controlpanel:3.1.1.467
     environment:
