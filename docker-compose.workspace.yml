@@ -11,8 +11,8 @@ services:
     tty: true
     restart: unless-stopped
     volumes:
-     - ./config/mysql/conf.d:/etc/mysql/conf.d
-     - ./config/mysql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+     - /pools/mirrordata/volumenes_docker/only2024/config/mysql/conf.d:/etc/mysql/conf.d
+     - /pools/mirrordata/volumenes_docker/only2024/config/mysql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
      - /pools/mirrordata/volumenes_docker/only2024/mysql_data:/var/lib/mysql
   onlyoffice-community-server:
     container_name: onlyoffice-community-server
@@ -61,7 +61,7 @@ services:
      - /pools/mirrordata/volumenes_docker/only2024/community_letsencrypt:/etc/letsencrypt
      - /pools/mirrordata/volumenes_docker/only2024/document_data:/var/www/onlyoffice/DocumentServerData
      - /sys/fs/cgroup:/sys/fs/cgroup:rw
-     - ./certs:/var/www/onlyoffice/Data/certs
+     - /pools/mirrordata/volumenes_docker/only2024/certs:/var/www/onlyoffice/Data/certs
   onlyoffice-elasticsearch:
     image: onlyoffice/elasticsearch:7.16.3
     container_name: onlyoffice-elasticsearch
@@ -105,7 +105,7 @@ services:
     volumes:
        - /pools/mirrordata/volumenes_docker/only2024/document_data:/var/www/onlyoffice/Data
        - /pools/mirrordata/volumenes_docker/only2024/document_log:/var/log/onlyoffice
-       - ./document_fonts:/usr/share/fonts/truetype/custom
+       - /pools/mirrordata/volumenes_docker/only2024/document_fonts:/usr/share/fonts/truetype/custom
        - /pools/mirrordata/volumenes_docker/only2024/document_forgotten:/var/lib/onlyoffice/documentserver/App_Data/cache/files/forgotten
   onlyoffice-mail-server:
     container_name: onlyoffice-mail-server
