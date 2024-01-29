@@ -20,6 +20,13 @@
   <a href="https://github.com/ONLYOFFICE/CommunityServer/releases"><img alt="https://github.com/ONLYOFFICE/CommunityServer/releases" src="https://img.shields.io/badge/release-11.0.0-blue.svg"></a>
 </p>
 
+Añadido por Susiño: para que esto funcione le he añadido al grub del sistema la línea systemd.unified_cgroup_hierarchy=0  tal y como se indica en el link siguiente https://discuss.linuxcontainers.org/t/2nd-system-upgraded-from-ubuntu-20-04-w-working-lxd-to-ubuntu-22-04-lxd-again-not-working/14009/18 ,del cual transcribo lo que dice en el párrafo adecuado justo abajo:
+
+Hi All, I’ve run afoul of this issue on my laptop and I went to add GRUB_CMDLINE_LINUX=“systemd.unified_cgroup_hierarchy=0” to my /etc/default/grub However, the file didn’t exist and even creating it and adding that line with a following update-grub hasn’t worked. Is there a way to verify this setting after it it set?
+
+Much Appreciated.
+
+Lo que se está haciendo es hacer que se use el cgroupsv1 ya que el cgroupsv2 que viene por defecto en ubuntu 22.04 no permite algo del privileged mode con cgroups y por lo tanto no admite el cgroups: host de la línea xxx
 
 * [Overview](#overview)
 * [Functionality](#functionality)
