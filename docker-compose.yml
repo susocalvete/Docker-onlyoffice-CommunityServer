@@ -63,7 +63,7 @@ services:
      - /sys/fs/cgroup:/sys/fs/cgroup:rw
      - /pools/mirrordata/volumenes_docker/only2024/certs:/var/www/onlyoffice/Data/certs
   onlyoffice-elasticsearch:
-    image: onlyoffice/elasticsearch:7.16.3
+    image: onlyoffice/elasticsearch:latest
     container_name: onlyoffice-elasticsearch
     restart: unless-stopped
     environment:
