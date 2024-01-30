@@ -6,7 +6,9 @@ services:
     environment:
      - MYSQL_ROOT_PASSWORD=my-secret-pw
     networks:
-     - onlyoffice
+       onlyoffice:
+         - ipv6_address: 2a02:9140:5780:0:c:face:a:aa02
+         - ipv4_address: 172.30.1.2
     stdin_open: true
     tty: true
     restart: unless-stopped
@@ -45,7 +47,9 @@ services:
      - ELASTICSEARCH_SERVER_HOST=onlyoffice-elasticsearch
      - ELASTICSEARCH_SERVER_HTTPPORT=9200
     networks:
-     - onlyoffice
+      onlyoffice:
+        - ipv6_address: 2a02:9140:5780:0:c:face:a:aa03
+        - ipv4_address: 172.30.1.3
     ports:
      - '41080:80'
      - '41443:443'
@@ -74,7 +78,9 @@ services:
       - "indices.memory.index_buffer_size=30%" 
       - "ingest.geoip.downloader.enabled=false"
     networks:
-    - onlyoffice    
+      onlyoffice:
+        - ipv6_address: 2a02:9140:5780:0:c:face:a:aa04
+        - ipv4_address: 172.30.1.4
     ulimits:
       memlock:
         soft: -1
@@ -98,7 +104,9 @@ services:
      - JWT_SECRET=jwt_secret
      - JWT_HEADER=AuthorizationJwt
     networks:
-      - onlyoffice
+        onlyoffice:
+          - ipv6_address: 2a02:9140:5780:0:c:face:a:aa05
+          - ipv4_address: 172.30.1.5
     expose:
       - '80'
       - '443'
@@ -120,7 +128,9 @@ services:
        - MYSQL_ROOT_PASSWD=Isadmin123
        - MYSQL_SERVER_DB_NAME=onlyoffice_mailserver
     networks:
-      - onlyoffice
+      onlyoffice:
+        - ipv6_address: 2a02:9140:5780:0:c:face:a:aa06
+        - ipv4_address: 172.30.1.6
     restart: unless-stopped
     privileged: true
     ports: ['25:25','143:143','587:587']
@@ -151,7 +161,9 @@ services:
       - /pools/mirrordata/volumenes_docker/only2024/controlpanel_data:/var/www/onlyoffice/Data
       - /pools/mirrordata/volumenes_docker/only2024/controlpanel_log:/var/log/onlyoffice
     networks:
-      - onlyoffice
+      onlyoffice:
+        - ipv6_address: 2a02:9140:5780:0:c:face:a:aa07
+        - ipv4_address: 172.30.1.7
     stdin_open: true
     tty: true
 networks:
@@ -161,6 +173,7 @@ networks:
     ipam:
       config:
         - subnet: 2a02:9140:5780:0:c:face:a:aa00/120
+        - subnet: 172.30.1.0/24
 #volumes:
 #  mail_data:
 #  mail_certs:
