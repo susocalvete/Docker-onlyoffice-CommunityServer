@@ -8,7 +8,7 @@ services:
     networks:
       onlyoffice:
         ipv6_address: 2a02:9140:5780:0:c:face:a:aa02
-         #- ipv4_address: 172.20.30.2
+        ipv4_address: 172.20.30.2
     stdin_open: true
     tty: true
     restart: unless-stopped
@@ -175,7 +175,8 @@ networks:
       config:
         - subnet: 2a02:9140:5780:0:c:face:a:aa00/120
           gateway: 2a02:9140:5780:0:c:face:a:aa01
-        #- subnet: 172.20.30.0/24
+        - subnet: 172.20.30.0/24
+          gateway: 172.20.30.1
 #volumes:
 #  mail_data:
 #  mail_certs:
