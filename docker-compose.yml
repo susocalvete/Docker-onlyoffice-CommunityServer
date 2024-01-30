@@ -7,7 +7,7 @@ services:
      - MYSQL_ROOT_PASSWORD=my-secret-pw
     networks:
       onlyoffice:
-         #- ipv6_address: 2a02:9140:5780:0:c:face:a:aa02
+         - ipv6_address: 2a02:9140:5780:0:c:face:a:aa02
          #- ipv4_address: 172.20.30.2
     stdin_open: true
     tty: true
