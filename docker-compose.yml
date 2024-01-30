@@ -157,6 +157,10 @@ services:
 networks:
   onlyoffice:
     driver: 'bridge'
+    enable_ipv6: true
+    ipam:
+      config:
+        - subnet: 2a02:9140:5780:0:c:dace:a::/112 
 #volumes:
 #  mail_data:
 #  mail_certs:
