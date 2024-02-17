@@ -135,12 +135,14 @@ services:
     privileged: true
     stdin_open: true
     tty: true
+    expose:
+      - '3306'
     ports:
       - '25:25'
       - '143:143'
       - '587:587'
       - '8081:8081'
-      - '3306:3306'
+      #- '3306:3306'
     volumes:
       - /pools/mirrordata/volumenes_docker/only2024/mail_data:/var/vmail
       - /pools/mirrordata/volumenes_docker/only2024/mail_certs:/etc/pki/tls/mailserver
